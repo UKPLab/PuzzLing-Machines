@@ -1,0 +1,71 @@
+
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<!--<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<!--https://www.mathjax.org/cdn-shutting-down/-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+The evaluation is separately done for each direction: English->Foreign and Foreign->English. We report the averaged scores in addition to both directions. For each answer, we calculate the following automatic measures: <a href="https://www.aclweb.org/anthology/P02-1040.pdf">BLEU-2</a>, <a href="https://www.aclweb.org/anthology/W16-2342/">CharacTER</a>, <a href="https://www.aclweb.org/anthology/W16-2341/">ChrF-3</a> and exact match (EM). EM is calculated as 1 if the prediction and reference sentences match and 0 otherwise. 
+
+<p>Puzzles are prepared in a way that they only have one answer. However the differences among languages allow for possible answers, e.g., translating a 3rd person pronoun into a non gender-marking language as "he,she or it" in English. Therefore, the participant's answer is evaluated against all alternative solutions and then the highest score is assigned. 
+</p>
+
+<h4>Example evaluation for "English to Foreign" translation</h4>
+
+<p>Below solution is taken from a NACLO puzzle where the foreign language is Basque, and the submission is from our SMT baseline. For this direction, we first remove the following punctuations: ".!?,".</p><br>
+
+<u>Solution:</u>  <b>"Nere familiak etxe berria erosi du"</b> <br>
+<u>Submission:</u> <b> "Nire familia du kotxe berria new house" </b> <br>
+
+<h5> BLEU-2 </h5>
+
+<p>Unlike in standard MT evaluation that use BLEU-4, we use BLEU-2 due to the dominant number of shorter phrases and sentences in our dataset. BLEU-2 is computed using modified unigram and bigram precisions as:</p>
+
+<script type="math/tex; mode=display">\text{BLEU-2} = \text{BP} \cdot \exp \bigg( \sum_{n=1}^{2} w_n \log p_n \bigg)</script>
+
+<p>
+
+In our case, there are 2 unigram matches, so p<sub>1</sub>= 2/7; and zero bi-gram matches which makes p<sub>2</sub>= 0/6. To avoid such harsh punishments, we use the NIST geometric sequence smoothing which subtitutes null n-gram counts with 1/(2^k), where k is 1 for the first n value for which the n-gram match count is null. In that case, p<sub>2</sub> is updated as 0,5/6. The brevity penalty (BP) will be 1 since submission is not shorter than the solution, and the weights are equally distributed as: 0.5 and 0.5. The final score is then calculated as <b>0.154</b>. </p>
+
+<h5> CharacTER </h5>
+This is a character based edit distance measure that is proposed for languages with richer morphological processes. It calculates the editing cost as the shifting cost plus the levenstein distance between the aligned phrases. </p>
+
+For the example above, the algorithm first finds the ideal match by shifting phrases of the submission, so that the edit distance between the submission and the solution is minimized:</p>
+
+<u>Solution:</u>  <b>"Nere familiak etxe berria erosi du"</b> <br>
+<u>Submission:</u> <b> "Nire familia du kotxe berria new house" </b> <br>
+<u>Shifted Submission:</u> <b> "Nire familia kotxe berria new du house" </b> <br> </p>
+
+As can be seen, "du" is replaced after "new". The shifting cost is calculated as the average length of the shifted phrase, which is 2.0 in our case. Next the character-level Levenstein distance between the shifted submission and the solution is calculated and then normalized by dividing to the length of shifted submission. The calculation is then: <i>CTER</i> = (2.0+13.0)/38.0 = 0.39. Finally we report the value 1.0-CTER=~<b>0.60</b> for convenience. 
+
+<h5> ChrF-3 </h5>
+Next, we use character trigram matching F1 score, ChrF-3, which is calculated as <b>0.68</b> for the example. (We experiment with various n-gram orders for word and the characters, however we found others to have high correlation with the scores we already have. 
+
+<h5> Exact Match (EM) </h5>
+This is a binary measure, which is "1" is the submission matches any of the solutions, and "0" if not, after the preprocessing steps e.g., removing punctuation. It will be then <b>0.0</b> for the example.
+
+<h4>Example evaluation for "Foreign to English" translation</h4>
+
+The same measures as above used for this direction as well. As explained in "Data" section, there are extra annotations to help participants to solve the puzzles due to the differences among languagues. These differences mostly occur for this direction, hence the preprocessing is slightly different. Consider the following scenario: </p>
+
+<u>Solution:</u>  <b>"You.SG [have] killed (her/him)."</b> <br>
+<u>Submission:</u> <b> "you danced with her." </b> <br></p>
+
+First of all, we remove the pronoun tags e.g., SG, PL both from the solution and submission. We belive these tags are most helpful while solving the puzzle, however not during evaluation. Next we remove certain punctuations and lowercase both the solution and submission. Then we create all alternative references as: </p>
+
+<u>Ref1</u>  <b>"you have killed (her/him)"</b> <br>
+<u>Ref2</u>  <b>"you have killed her"</b> <br>
+<u>Ref3</u>  <b>"you have killed him"</b> <br>
+<u>Ref4</u>  <b>"you killed (her/him)"</b> <br>
+<u>Ref5</u>  <b>"you killed her"</b> <br>
+<u>Ref6</u>  <b>"you killed him"</b> <br>
+</p>
+
+We report the best scores measured over all alternative references. In this particular case, the scores are calculated as BLEU-2: <b>0.28</b>, CharacTER: <b>0.52</b>, ChrF-3: <b>0.44</b> and EM: <b>0.0</b>. 
