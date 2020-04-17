@@ -14,7 +14,7 @@
       <link rel="stylesheet" href="stylesheets/explore.css">
       <link rel="stylesheet" href="stylesheets/index.css">
       <link rel="stylesheet" href="stylesheets/layout.css">
-      <link rel="canonical" href="http://UKPLab.github.io/PuzzLing-Machines">
+      <link rel="canonical" href="http://ukplab.github.io/PuzzLing-Machines">
    </head>
    <body>
       <div class="navbar navbar-default navbar-fixed-top" id="topNavbar" role="navigation">
@@ -67,20 +67,19 @@
                            <h2>Get the Data</h2>
                         </div>
                         <p align="left">
-                           The shared task is split into two phases:
-                           <p><b>1. Trial phase</b></p>
+
+                           <p><b>1. Trial Data</b></p>
                            <p>
-                              In this phase, you can train models on a small subset of our dataset to get a feel for how well your models perform at the task. <br>
-                              Download the trial data (without answers):
+                              This is a small subset of our dataset to get a feel for how well your models perform at the task. Download the trial data (without answers):
                            </p>
                            <a class="btn actionBtn inverseBtn" href="data/public_data_dev.zip" download="data/public_data_dev.zip">Trial Data (Without answers)</a>
                            <p>
-                              You can use this phase to tune your models as well. In that case download the following:
+                              You can use trial data to tune your models as well. In that case download the following:
                            </p>
                            <a class="btn actionBtn inverseBtn" href="data/public_reference_data_dev.zip" download="data/public_reference_data_dev.zip">Trial Data (With answers)</a>
-                           <p><b>2. Competition phase</b></p>
+                           <p><b>2. Competition Data</b></p>
                            <p>
-                              This phase is used for the final evaluation of your models on the rest of our dataset. The results are displayed on the final leaderboard. <br>
+                              This dataset is used for the final evaluation of your models. <br>
                               Download the competition data below:
                            </p>
                            <a class="btn actionBtn inverseBtn" href="data/public_data_test.zip" download="data/public_data_test.zip">Competition Data</a>
@@ -106,7 +105,7 @@
                            <h2>Have Questions or Want to Contribute?</h2>
                         </div>
                         <p align="left">
-                           Feel free to contact <a href="https://gozdesahin.github.io/">Gözde Gül Şahin</a> at <a href = "mailto: sahin {at} ukp.informatik.tu-darmstadt.de">sahin {at} ukp.informatik.tu-darmstadt.de</a>.
+                           Feel free to contact <a href="https://gozdesahin.github.io/">Gözde Gül Şahin</a> at <a href = "mailto: goezde {dot} guel {at} gmail {dot} com">goezde {dot} guel {at} gmail {dot} com</a>.
                         </p>
                         <div class="infoHeadline">
                            <h2>Acknowledgements</h2>
@@ -114,7 +113,15 @@
                         <p align="left">
                            We'd like to thank Liane Vogel, Marc Simon Uecker and Siddharth Singh Parihar for their great help during the project. We are grateful to <a href="https://yale-lily.github.io/">Dragomir Radev</a> for his feedback and continuous help with encoding problems encountered during annotation. We thank <a href="https://alopez.github.io/">Adam Lopez</a> and Ilia Kuznetsov for providing feedback on drafts of the paper. Finally, we thank <a href="https://rajpurkar.github.io/">Pranav Rajpurkar</a> for allowing us to build this website based on <a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a>.
                         </p>
-                     </div>
+                        <div class="infoHeadline">
+                           <h2>Terms and Conditions</h2>
+                        </div>
+                        <p align="left">
+                           The dataset is derived from linguistic puzzles created by experts and is solely created for <b>research purposes</b>. The puzzles used in this shared task are compiled from various resources that may be copyrighted by the following organizations: @University of Oregon Department of Linguistics, ©2003-2019 International Linguistics Olympiad, @2007-2018 North American Computational Linguistics Open Competition, ©2013-2017 UK Linguistics Olympiad, @2008-2017 OZCLO The Australian Computational and Linguistics Olympiad,  @2009 Russian Linguistics Olympiad, @2007-2009 Estonian Linguistic Olympiad, @2012 All Ireland Linguistics Olympiad. Please insert citations or copyright notices to puzzles where appropriate.
+                           The dataset is distributed under the <a href="http://creativecommons.org/licenses/by/1.0/legalcode">CC BY 1.0</a> license. 
+                        </p>
+                     
+                     </div>                     
                      <div class="infoSubheadline">
                         <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://UKPLab.github.io/PuzzLing-Machines" data-text="Automatically solving linguistic translation puzzles - a 'learning from small data' challenge" data-via="UKPLab" data-size="large" data-hashtags="LingPuzz">Tweet</a>
                         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -408,7 +415,11 @@
                            <div class="left">
                                  <p>The evaluation is separately done for each direction: English &rarr; Foreign and Foreign &rarr; English. We report the averaged scores in addition to both directions. For each answer, we calculate the following automatic measures: <a href="https://www.aclweb.org/anthology/P02-1040.pdf">BLEU-2</a>, <a href="https://www.aclweb.org/anthology/W16-2342/">CharacTER</a>, <a href="https://www.aclweb.org/anthology/W16-2341/">ChrF-3</a> and exact match (EM). EM is calculated as 1 if the prediction and reference sentences match and 0 otherwise. </p></br>
 
-                                 <p> Puzzles are prepared in a way that they only have one answer. However the differences among languages allow for possible answers, e.g., translating a 3rd person pronoun into a non gender-marking language as "he,she or it". In such cases, the answer is evaluated against all alternative solutions and then the highest score is assigned. More details on scores, annotation scheme and preprocessing can be found in the paper and the <a href="https://competitions.codalab.org/competitions/24302?secret_key=198f82df-8cd2-4864-b125-b7b31463cd15">Codalab page</a>.</p> 
+                                 <p> Puzzles are prepared in a way that they only have one answer. However the differences among languages allow for possible answers, e.g., translating a 3rd person pronoun into a non gender-marking language as "he,she or it". In such cases, the answer is evaluated against all alternative solutions and then the highest score is assigned. More details on scores, annotation scheme and preprocessing can be found in the paper and the <a href="https://competitions.codalab.org/competitions/24302?secret_key=198f82df-8cd2-4864-b125-b7b31463cd15">Codalab page</a>.</p></br>
+
+                                 <p>You can download the official evaluation script below:
+                                 <a class="btn actionBtn inverseBtn" href="data/evaluation_script.zip" download="data/evaluation_script.zip">Evaluation Script</a>
+                                 To run the evaluation, place the reference puzzles under <code>&lt;inputPath&gt;/ref</code> and your solution under <code>&lt;inputPath&gt;/res</code>. Then run <code>python3 evaluate.py &lt;inputPath&gt; &lt;outputPath&gt;</code>. Check <code>score.txt</code> under <code>&lt;outputPath&gt;</code>. 
                            </div>
                         </p>
                         
