@@ -1,6 +1,6 @@
 # PuzzLing Machines: A Challenge on Learning From Small Data
 
-To participate in the challenge, please see the competition page [here](https://eval.ai/web/challenges/challenge-page/2145). The dataset files for the development and test phases are available under the data folder. Note that the reference data for the development data is available (public_reference_data_dev.zip) to evaluate against using the instructions in evaluation_script.zip.  
+To participate in the challenge, please see the competition page [here](https://eval.ai/web/challenges/challenge-page/2156/overview). The dataset files for the development and test phases are available under the data folder. Note that the reference data for the development data is available (public_reference_data_dev.zip) to evaluate against using the instructions in evaluation_script.zip.  
 
 Please refer to the github pages for detailed information on the project: https://ukplab.github.io/PuzzLing-Machines/ 
 
